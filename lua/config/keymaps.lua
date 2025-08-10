@@ -18,5 +18,9 @@ vim.keymap.set("n", "<leader>fs", function()
   require("telescope.builtin").live_grep({ cwd = require("lazyvim.util").root() })
 end, { desc = "[F]ind [S]tring (project)" })
 
-vim.keymap.set("n", "<C-_>", "<cmd>ToggleTerm<CR>", { noremap = true, silent = true })
-vim.keymap.set("t", "<C-_>", [[<C-\><C-n><cmd>ToggleTerm<CR>]], { noremap = true, silent = true })
+vim.keymap.set({ "n", "t" }, "<C-_>", function()
+  require("toggleterm").toggle(1, nil, nil, "float")
+end, { noremap = true, silent = true })
+
+-- vim.keymap.set("n", "<C-_>", "<cmd>ToggleTerm<CR>", { noremap = true, silent = true })
+-- vim.keymap.set("t", "<C-_>", [[<C-\><C-n><cmd>ToggleTerm<CR>]], { noremap = true, silent = true })

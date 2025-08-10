@@ -6,7 +6,7 @@ return {
       shade_terminals = true,
       start_in_insert = true,
       insert_mappings = true,
-      open_mapping = [[c-\>]],
+      open_mapping = [[<C-_>]], -- Ctrl-/
       direction = "float",
       float_opts = {
         border = "curved",
