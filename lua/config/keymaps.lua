@@ -19,6 +19,9 @@ vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, { desc = "LSP Hover Docs" })
 vim.keymap.del("n", "<C-/>")
 vim.keymap.del("t", "<C-/>")
 
+vim.keymap.set("n", "<leader>a", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Toggle the Chat Companion" })
+vim.keymap.set("n", "<leader>A", "<cmd>CodeCompanionActions<CR>", { desc = "Toggle the Chat Companion" })
+
 for _, key in ipairs({ "<C-_>", "<C-/>" }) do
   vim.keymap.set({ "n", "t" }, key, "<cmd>ToggleTerm direction=float<CR>", { desc = "Toggle floating terminal" })
 end
