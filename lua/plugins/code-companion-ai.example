@@ -1,0 +1,85 @@
+-- Wasn't able to get the env pulled probably
+-- Example file with no ENV
+
+return {
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "ravitemer/mcphub.nvim",
+      "j-hui/fidget.nvim",
+      { "nvim-mini/mini.diff", config = true },
+    },
+    opts = {
+      strategies = {
+        chat = {
+          adapter = "gemini",
+          model = "gemini-2.5-flash",
+        },
+        inline = {
+          adapter = "gemini",
+        },
+      },
+      adapters = {
+        gemini = function()
+          return require("codecompanion.adapters").extend("gemini", {
+            schema = {
+              model = {
+                default = "gemini-2.5-flash",
+              },
+            },
+            env = {
+              api_key = "",
+            },
+          })
+        end,
+      },
+      extensions = {
+        mcphub = {
+          callback = "mcphub.extensions.codecompanion",
+          opts = {
+            make_vars = true,
+            make_slash_commands = true,
+            show_result_in_chat = true,
+          },
+        },
+      },
+    },
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" },
+  },
+  {
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    opts = {
+      preview = {
+        filetypes = { "markdown", "codecompanion" },
+        ignore_buftypes = {},
+      },
+    },
+  },
+  {
+    "nvim-mini/mini.diff",
+    config = function()
+      local diff = require("mini.diff")
+      diff.setup({
+        -- Disabled by default
+        source = diff.gen_source.none(),
+      })
+    end,
+  },
+  {
+    "HakonHarnes/img-clip.nvim",
+    opts = {
+      filetypes = {
+        codecompanion = {
+          prompt_for_file_name = false,
+          template = "[Image]($FILE_PATH)",
+          use_absolute_path = true,
+        },
+      },
+    },
+  },
+}
