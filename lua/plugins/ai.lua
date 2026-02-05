@@ -93,31 +93,6 @@ return {
 
       -- Adapters -------------------------------------------------------------
       adapters = {
-        gemini_3_27b = function()
-          return require("codecompanion.adapters").extend("openai_compatible", {
-            formatted_name = "GEMINI 3 27B",
-            env = {
-              url = "https://openrouter.ai/api",
-              api_key = vim.env.OPENROUTER_API_KEY,
-              chat_url = "/v1/chat/completions",
-            },
-            schema = {
-              model = { default = "google/gemma-3-27b-it:free" },
-            },
-            handlers = {
-              parse_message_meta = function(self, data)
-                local extra = data.extra
-                if extra and extra.reasoning then
-                  data.output.reasoning = { content = extra.reasoning }
-                  if data.output.content == "" then
-                    data.output.content = nil
-                  end
-                end
-                return data
-              end,
-            },
-          })
-        end,
         http = {
           qwen_coder_3 = function()
             return require("codecompanion.adapters").extend("openai_compatible", {
@@ -205,6 +180,32 @@ return {
               },
               schema = {
                 model = { default = "gemini-2.5-flash" },
+              },
+            })
+          end,
+
+          gemini_3_27b = function()
+            return require("codecompanion.adapters").extend("openai_compatible", {
+              formatted_name = "GEMINI 3 27B",
+              env = {
+                url = "https://openrouter.ai/api",
+                api_key = vim.env.NVIM_OPENROUTER_API_KEY,
+                chat_url = "/v1/chat/completions",
+              },
+              schema = {
+                model = { default = "google/gemma-3-27b-it:free" },
+              },
+              handlers = {
+                parse_message_meta = function(self, data)
+                  local extra = data.extra
+                  if extra and extra.reasoning then
+                    data.output.reasoning = { content = extra.reasoning }
+                    if data.output.content == "" then
+                      data.output.content = nil
+                    end
+                  end
+                  return data
+                end,
               },
             })
           end,
