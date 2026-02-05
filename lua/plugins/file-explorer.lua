@@ -11,7 +11,10 @@ return {
         },
       },
     },
-    keys = {},
+    keys = {
+      -- Explicitly disable the explorer keybinding
+      { "<leader>e", false },
+    },
   },
   {
 
@@ -22,6 +25,10 @@ return {
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
+    init = function()
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
     keys = {
       { "<leader>e", "<cmd>Neotree toggle right<cr>", desc = "Toggle Neo-tree" },
     },
@@ -31,12 +38,18 @@ return {
       enable_git_status = true,
       enable_diagnostics = true,
       filesystem = {
-        follow_current_file = {
-          enabled = false,
+        filtered_items = {
+          visible = true,
+          hide_dotfiles = false, -- ← this is the key line: false = show dotfiles
+          hide_gitignored = false, -- keep ignoring .gitignore files (recommended)
+          hide_by_name = {},
+          never_show = {},
         },
-        hijack_netrw_behavior = "open_current",
+        follow_current_file = {
+          enabled = true,
+        },
+        hijack_netrw_behavior = "disabled",
         use_libuv_file_watcher = true,
-        -- Keep the tree at the initial root directory
         bind_to_cwd = false,
         cwd_target = {
           sidebar = "global",
