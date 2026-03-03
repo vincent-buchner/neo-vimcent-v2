@@ -70,6 +70,11 @@ return {
     -- animation = true,
     -- insert_at_start = true,
     -- …etc.
+    highlight_preset = "default",
   },
+  config = function(_, opts)
+    require("barbar").setup(opts)
+    vim.api.nvim_set_hl(0, "BufferTabpageFill", { bg = "none" })
+  end,
   version = "^1.0.0", -- optional: only update when a new 1.x version is released
 }

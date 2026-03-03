@@ -1,13 +1,5 @@
 return {
 
-  -- Notifications ------------------------------------------------------------
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      vim.notify = require("notify")
-    end,
-  },
-
   -- Noice (message routing, command palette, etc.) ---------------------------
   {
     "folke/noice.nvim",
