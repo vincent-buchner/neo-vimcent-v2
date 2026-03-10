@@ -32,8 +32,37 @@ return {
       ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" }, -- Only active in file explorer buffers
     },
 
+    -- Unfocus
+    { "<C-q>", "<cmd>ClaudeCodeFocus<cr>", desc = "Claude Code Unfocus", mode = { "n", "x" } },
+
     -- Diff management (for reviewing Claude's proposed changes)
     { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
     { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+  },
+  opts = {
+    terminal = {
+      ---@module "snacks"
+      ---@type snacks.win.Config|{}
+      snacks_win_opts = {
+        keys = {
+          claude_hide = {
+            "<C-q>",
+            function(self)
+              self:hide()
+            end,
+            mode = "t",
+            desc = "Hide the terminal",
+          },
+          normal_mode = {
+            "<C-d>",
+            function()
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, true, true), "n", false)
+            end,
+            mode = "t",
+            desc = "Exit terminal mode",
+          },
+        },
+      },
+    },
   },
 }

@@ -31,6 +31,7 @@ return {
         end
 
         map("<esc>", [[<C-\><C-n>]])
+        map("<C-d>", [[<C-\><C-n>]])
         map("<C-h>", [[<C-\><C-n><C-w>h]])
         map("<C-j>", [[<C-\><C-n><C-w>j]])
         map("<C-k>", [[<C-\><C-n><C-w>k]])

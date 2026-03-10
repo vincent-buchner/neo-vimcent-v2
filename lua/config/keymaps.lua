@@ -19,8 +19,16 @@ vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, { desc = "LSP Hover Docs" })
 vim.keymap.del("n", "<C-/>")
 vim.keymap.del("t", "<C-/>")
 
-vim.keymap.set("n", "<leader>a", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Toggle the Chat Companion" })
-vim.keymap.set("n", "<leader>A", "<cmd>CodeCompanionActions<CR>", { desc = "Toggle the Chat Companion" })
+-- Control + d unfocuses terminal
+vim.keymap.set("t", "<C-d>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    if not buf_name:match("claude") then
+      vim.keymap.set("t", "<C-d>", "<C-\\><C-n>", { buffer = true })
+    end
+  end,
+})
 
 for _, key in ipairs({ "<C-_>", "<C-/>" }) do
   vim.keymap.set({ "n", "t" }, key, "<cmd>ToggleTerm direction=float<CR>", { desc = "Toggle floating terminal" })
