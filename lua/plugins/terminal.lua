@@ -17,6 +17,7 @@ return {
       end,
       title_pos = "center",
     },
+    persist_size = false,
   },
 
   config = function(_, opts)

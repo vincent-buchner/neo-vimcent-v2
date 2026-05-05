@@ -4,3 +4,5 @@
 
 vim.opt.relativenumber = false
 vim.g.lazyvim_picker = "telescope"
+vim.opt.modeline = false
+vim.opt.cursorline = false

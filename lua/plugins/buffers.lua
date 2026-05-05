@@ -54,6 +54,12 @@ return {
     map("n", "<C-p>", "<Cmd>BufferPick<CR>", opts)
     map("n", "<C-s-p>", "<Cmd>BufferPickDelete<CR>", opts)
 
+    -- Refresh
+    vim.api.nvim_create_user_command("BufferRefresh", function()
+      vim.cmd("e!")
+    end, { desc = "Reload current buffer from disk" })
+    map("n", "<leader>bR", "<Cmd>BufferRefresh<CR>", opts)
+
     -- Sort automatically by...
     map("n", "<Space>bb", "<Cmd>BufferOrderByBufferNumber<CR>", opts)
     map("n", "<Space>bn", "<Cmd>BufferOrderByName<CR>", opts)
